@@ -13,7 +13,7 @@ npm install https://github.com/tmetcalfe89/monthly-calendar
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
 import MonthlyCalendar from 'monthly-calendar'
 
