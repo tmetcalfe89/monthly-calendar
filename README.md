@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save monthly-calendar
+npm install https://github.com/tmetcalfe89/monthly-calendar
 ```
 
 ## Usage
