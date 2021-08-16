@@ -15,13 +15,10 @@ npm install https://github.com/tmetcalfe89/monthly-calendar
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'monthly-calendar'
-import 'monthly-calendar/dist/index.css'
+import MonthlyCalendar from 'monthly-calendar'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const Example = () => {
+  return <MonthlyCalendar />
 }
 ```
 
