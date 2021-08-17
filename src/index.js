@@ -17,29 +17,29 @@ const MonthlyCalendar = ({
   onChangeMonth,
   onChangeDate
 }) => {
-  const [date, setDate] = useState(defaultMonth)
-  const [activeDate, setActiveDate] = useState(defaultDate)
+  const [month, setMonth] = useState(defaultMonth)
+  const [date, setDate] = useState(defaultDate)
 
-  const month = date.getMonth() + 1
-  const year = date.getFullYear()
+  const monthMonth = month.getMonth() + 1
+  const monthYear = month.getFullYear()
 
-  const prev = () => setDate(new Date(date.setMonth(date.getMonth() - 1)))
-  const next = () => setDate(new Date(date.setMonth(date.getMonth() + 1)))
+  const prev = () => setMonth(new Date(month.setMonth(month.getMonth() - 1)))
+  const next = () => setMonth(new Date(month.setMonth(month.getMonth() + 1)))
   const today = () =>
-    setDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1))
+    setMonth(new Date(new Date().getFullYear(), new Date().getMonth(), 1))
 
   useEffect(
     () =>
-      onChangeMonth && onChangeMonth(date.getFullYear(), date.getMonth() + 1),
-    [date]
+      onChangeMonth && onChangeMonth(month.getFullYear(), month.getMonth() + 1),
+    [month]
   )
 
-  useEffect(() => onChangeDate && onChangeDate(activeDate), [activeDate])
+  useEffect(() => onChangeDate && onChangeDate(date), [date])
 
   return (
     <div style={containerStyles}>
       <div style={controlBoxStyles}>
-        <ControlBox next={next} prev={prev} today={today} date={date} />
+        <ControlBox next={next} prev={prev} today={today} date={month} />
       </div>
       <div style={dayContainerStyles}>
         {days.map((e) => (
@@ -47,18 +47,24 @@ const MonthlyCalendar = ({
         ))}
       </div>
       <div style={dateContainerStyles}>
-        {new Array(getStartDayOffset(month, year)).fill(0).map((e, i) => (
-          <DateCell />
-        ))}
-        {new Array(getDaysInMonth(month, year)).fill(0).map((e, i) => (
-          <DateCell
-            date={new Date(year, month - 1, i + 1)}
-            activeDate={activeDate}
-            setActiveDate={(date) => setActiveDate(date)}
-          />
-        ))}
+        {new Array(getStartDayOffset(monthMonth, monthYear))
+          .fill(0)
+          .map((e, i) => (
+            <DateCell />
+          ))}
+        {new Array(getDaysInMonth(monthMonth, monthYear))
+          .fill(0)
+          .map((e, i) => (
+            <DateCell
+              date={new Date(monthYear, monthMonth - 1, i + 1)}
+              currentSelection={date}
+              setCurrentSelection={(date) => setDate(date)}
+            />
+          ))}
         {new Array(
-          37 - getDaysInMonth(month, year) - getStartDayOffset(month, year)
+          37 -
+            getDaysInMonth(monthMonth, monthYear) -
+            getStartDayOffset(monthMonth, monthYear)
         )
           .fill(0)
           .map((e, i) => (
